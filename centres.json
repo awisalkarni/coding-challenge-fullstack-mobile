@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Centre A",
+		"location": "PJ"
+	},
+	{
+		"name": "Centre B",
+		"location": "Kajang"
+	},
+	{
+		"name": "Centre C",
+		"location": "Cheras"
+	},
+	{
+		"name": "Centre D",
+		"location": "Shah Alam"
+	},
+	{
+		"name": "Centre E",
+		"location": "Cyberjaya"
+	}
+]
