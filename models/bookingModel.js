@@ -15,10 +15,15 @@ var bookingSchema = mongoose.Schema({
     	type: String,
     	required: true
     },
-    slot_time: {
+    slot_date: {
     	type : Date,
     	default: null
+    },
+    slot_range: {
+        type: Array,
+        default: []
     }
+
 });
 
 var booking = module.exports = mongoose.model('booking', bookingSchema);

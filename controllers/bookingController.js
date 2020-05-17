@@ -1,5 +1,8 @@
 var fs = require('fs');
 const tc = require("time-slots-generator");
+var moment = require('moment'); // require
+moment().format(); 
+
 
 var Booking = require('../models/bookingModel');
 
@@ -31,14 +34,26 @@ exports.centres = function(req, res) {
 }
 
 exports.slots = function(req, res){
-	startTime = 9*60;
-	endTime = 18*60;
-	blockTimes = [[540,570]];
+
+	blockTimes = [[30,510], [1080,1440]];
 	timeInterval = "half";
 	showTimeAsString = true;
 	includeStartBlockedTime = false;
 	includeEndBlockedTime = false;
-	var timeslots = tc.getTimeSlots(blockTimes, showTimeAsString, timeInterval, includeStartBlockedTime, includeEndBlockedTime)
 
-	res.json(timeslots);
+	var dateArray = [];
+    var currentDate = moment();
+    var stopDate = moment().add(2, 'w');;
+    while (currentDate <= stopDate) {
+    	var isWeekend = moment(currentDate).day()%6==0;
+    	console.log(isWeekend);
+    	if (!isWeekend) {
+    		var timeslots = tc.getTimeSlots(blockTimes, showTimeAsString, timeInterval, includeStartBlockedTime, includeEndBlockedTime);
+    		var available_date = {date: moment(currentDate).format('YYYY-MM-DD'), slots: timeslots};
+    		dateArray.push(available_date);
+    	}
+        currentDate = moment(currentDate).add(1, 'days');
+    }
+
+	res.json({available_dates: dateArray});
 }
