@@ -72,19 +72,6 @@ exports.slots = function(req, res){
     	res.json({available_dates: dateArray});
 
     });
-
-    
- //    while (currentDate <= endDate) {
- //    	var isWeekend = moment(currentDate).day()%6==0;
- //    	if (!isWeekend) {
- //    		var timeslots = tc.getTimeSlots(blockTimes, showTimeAsString, timeInterval, includeStartBlockedTime, includeEndBlockedTime);
- //    		var available_date = {date: moment(currentDate).format('YYYY-MM-DD'), slots: timeslots};
- //    		dateArray.push(available_date);
- //    	}
- //        currentDate = moment(currentDate).add(1, 'days');
- //    }
-
-	// res.json({available_dates: dateArray});
 }
 
 exports.book = function(req, res) {
@@ -95,22 +82,18 @@ exports.book = function(req, res) {
 
 	var slotRange = [timeSlot, timeSlot+30];
 
-	var result = Booking.findOneAndUpdate({_id: bookingId}, {$set:{slot_date: date, slot_range: slotRange, centre_id: centreId}}, {new: true}, function(err, data){
+	Booking.find({centre_id: centreId, slot_date: date, slot_range: slotRange}, function(err, data){
 		if (err) throw err;
-		res.json(data);
+		if (data.length != 0) {
+			res.status(409).send({error: "This slots at "+ centreId +" unavailable."});
+		} else {
+			Booking.findOneAndUpdate({_id: bookingId}, {$set:{slot_date: date, slot_range: slotRange, centre_id: centreId}}, {new: true}, function(err, data){
+				if (err) throw err;
+				res.json(data);
+			});
+		}
 	});
+
+	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
