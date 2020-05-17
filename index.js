@@ -9,7 +9,7 @@ let mongoose  = require('mongoose');
 const path = require('path');
 
 // Setup server port
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 
 // Add the code below to index.js
 // Import routes
