@@ -15,6 +15,9 @@ var bookingSchema = mongoose.Schema({
     	type: String,
     	required: true
     },
+    centre_id: {
+        type: String,
+    },
     slot_date: {
     	type : Date,
     	default: null

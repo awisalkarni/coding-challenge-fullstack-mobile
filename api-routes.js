@@ -15,7 +15,9 @@ var bookingController = require('./controllers/bookingController');
 
 router.route('/vehicles').get(vehicleController.index);
 router.route('/booking/init').post(bookingController.init);
+
 router.route('/booking/centres').get(bookingController.centres);
 router.route('/booking/slots').get(bookingController.slots);
+router.route('/booking/book').post(bookingController.book);
 
 module.exports = router;
