@@ -13,5 +13,8 @@ There are 2 controllers and 1 models.
 2. POST /api/booking/init (using the car_make, car_model and phone_number to create initial booking)
 3. GET /api/booking/centres (list centres with ids)
 4. GET /api/booking/slots (list all slots using centre id and shows blocked slots)
-5. POST /api/booking/book (API to finally book the appointment)
+5. POST /api/booking/book (API to finally book the appointment. Will return 409 conflict if slots taken)
 
+### License
+
+MIT
